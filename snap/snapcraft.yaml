@@ -4,14 +4,27 @@ summary: A command line client for signal # 79 char long summary
 description: |
   signal-cli is a commandline client for the Signal messenger service.
 
+##architectures:
+##  - build-on: amd64
+
 confinement: strict # use 'strict' once you have the right plugs and slots
+grade: stable
 base: core20
 
 parts:
   signal-cli:
     plugin: dump
     source: https://github.com/AsamK/signal-cli/releases/download/v0.9.1/signal-cli-0.9.1.tar.gz
-    stage-packages: [openjdk-11-jre, libunixsocket-java, qrencode]
+    build-packages: 
+    - openjdk-11-jre-headless
+    - ca-certificates
+    - ca-certificates-java
+    - libunixsocket-java
+    - qrencode
+    stage-packages: 
+    - openjdk-11-jre-headless
+    - libunixsocket-java
+    - qrencode
 
 apps:
   signal-cli:
